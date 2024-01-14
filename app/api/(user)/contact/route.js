@@ -406,8 +406,8 @@ export async function POST(request) {
         `
         
           let mailOptions = {
-            from: '"Bunkar Banaras" <16himanshu16yadav@gmail.com>', // sender address
-            to: email, // list of receivers
+            from: '"Bunkar Banaras" <bunkarbanaras@gmail.com>', // sender address
+            to: "bunkarbanaras@gmail.com", // list of receivers
             subject: 'Bunkar Banaras Contact Form', // Subject line
             html:htmlcontent// html body
           };
