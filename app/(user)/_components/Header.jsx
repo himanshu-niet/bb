@@ -45,9 +45,7 @@ const Header = () => {
               <Link href="/order" className="flex-c-m trans-04 p-lr-25">
                 My Account
               </Link>
-              <Link href="/admin-login" className="flex-c-m trans-04 p-lr-25">
-                Admin
-              </Link>
+             
 
             </div>
           </div>
@@ -170,9 +168,7 @@ const Header = () => {
               <Link href="/order" className="flex-c-m p-lr-10 trans-04">
                 My Account
               </Link>
-              <Link href="/admin-login" className="flex-c-m p-lr-10 trans-04">
-                Admin
-              </Link>
+              
 
             </div>
           </li>
