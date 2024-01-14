@@ -12,7 +12,6 @@ import Aspects from './_components/Aspects'
 
 const page = () => {
 
-
   return (
     <>
     <section className="bg0 lg:pt-24 ">
