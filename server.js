@@ -23,3 +23,4 @@ app.prepare().then(() => {
     console.log(`Runing on port ${port}, dev: ${dev}`)
   })
 })
+//update
