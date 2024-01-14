@@ -9,14 +9,8 @@ const Hero = () => {
 
   return (
 
-    <section className=" p-b-54 ">
-      <div className="container">
-
-        <div className="mt-5">
-          <h3 className="ltext-103 cl5 mb-5 ">More Collection</h3>
-        </div>
-
-        <div className="p-b-10">
+   
+    <div className="p-b-10">
 
           <div className='grid md:grid-cols-3 gap-x-4 gap-y-3 grid-flow-row-dense'>
 
@@ -53,8 +47,6 @@ const Hero = () => {
           </div>
 
         </div>
-      </div>
-    </section>
   )
 }
 
