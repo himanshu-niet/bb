@@ -13,24 +13,28 @@ const page = () => {
 
   return (
     <>
-
+    <section className="bg0 lg:pt-24 ">
       <ProductSlider />
-
-      <section className=" p-t-50">
-        <div className="container my-5">
-          <Card />
-
-        </div>
       </section>
+
+
+        
+        <div className="container p-b-10 p-t-10">
+        <div className="container">
+        <img src="images/dap.png" alt="IMG-BANNER" className='my-24' />
+        </div>
+
+          <Card />
+        </div>
 
 
       <Categories />
 
-      <section className="bg0 p-t-23 p-b-140">
+      <section className="bg0 p-t-23 ">
         <div className="container">
-          <div className="p-b-10">
-            <h3 className="ltext-103 cl5 mb-5 ">New To The Shop</h3>
-          </div>
+        <div className="">
+        <h3 className="ltext-103 cl5 mb-5 ">NEW TO THE SHOP</h3>
+      </div>
 
           <HomeProduct />
 
@@ -49,7 +53,7 @@ const page = () => {
 
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <div className='container'>
-          <div className="p-b-10">
+          <div className="">
             <h3 className="ltext-103 cl5 mb-5 ">Salient Aspects</h3>
           </div>
         </div>
