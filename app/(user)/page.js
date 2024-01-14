@@ -47,7 +47,7 @@ const page = () => {
         </div>
 
 
-      <div className="max-w-[85rem] mx-auto mt-8">
+      <div className="max-w-[85rem] mx-auto mt-8 px-4">
         <div className='container'>
         <Heading text={"SALIENT ASPECTS"}/>
         </div>
