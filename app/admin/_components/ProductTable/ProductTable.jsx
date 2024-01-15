@@ -38,6 +38,7 @@ export default function ProductTable() {
       },[])
       const [users,setData]=useState([]);
       
+      
       const getApi=async ()=>{
         axios.get("/api/admin/product").then((res)=>{
           setData(res.data.data)

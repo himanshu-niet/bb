@@ -6,6 +6,59 @@ import axios from "axios";
 
 export default function ProductUpdate({data}) {
  
+  const colors= [
+    "Red",
+    "Royal Blue",
+    "Green",
+    "Yellow",
+    "Pink",
+    "Purple",
+    "Turquoise",
+    "Orange",
+    "Maroon",
+    "Teal",
+    "Peach",
+    "Gold",
+    "Silver",
+    "Cream",
+    "Navy Blue",
+    "Lavender",
+    "Wine",
+    "Beige",
+    "Mustard",
+    "Aqua Blue",
+    "Emerald Green",
+    "Magenta",
+    "Rust",
+    "Sky Blue",
+    "Coral",
+    "Indigo",
+    "Lilac",
+    "Rose Pink",
+    "Mint Green",
+    "Charcoal Gray",
+    "Tangerine",
+    "Olive Green",
+    "Mauve",
+    "Coffee Brown",
+    "Orchid",
+    "Slate Gray",
+    "Ivory",
+    "Turmeric Yellow",
+    "Blush Pink",
+    "Cobalt Blue",
+    "Sea Green",
+    "Burgundy",
+    "Peacock Blue",
+    "Chocolate Brown",
+    "Salmon Pink",
+    "Copper",
+    "Brick Red",
+    "Pearl White",
+    "Electric Blue",
+    "Dusty Rose"
+  ];
+
   const categorySubcategoryMap = {
     "Georgette Sarees": ["Silver Zari", "Water Zari", "Meenakari Work", "Antique Zari", "Gold Zari", "Chikankari", "Bandhani"],
     "Katan Silk Sarees": ["Jaal Work", "Kadua Motifs", "Kadua Jangla"],
@@ -220,15 +273,16 @@ console.log(response)
               {/* End Col */}
               <div className="sm:col-span-9">
                 <div className="sm:flex">
-                  <select value={data.color} onChange={(e) => setSelectedColor(e.target.value)}
+                  <select value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)}
                    className="py-2 px-3 pe-11 block w-full border border-gray-300 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
                   >
                     <option >Uncategorized</option>
-                    <option>Black</option>
-                    <option>Blue</option>
-                    <option>Pink</option>
-                    <option>Green</option>
-                    <option>Red</option>
+
+                    {colors.map((clr)=>{
+                      return(
+                        <option>{clr}</option>
+                      )
+                     })}
                   </select>
 
 

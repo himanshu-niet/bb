@@ -21,7 +21,7 @@ model User {
 model Product {
   id          String       @id @default(uuid())
   title       String       @unique
-  desc        String
+  desc        String       @db.LongText
   price       String
   discount    String
   category    String
@@ -37,6 +37,7 @@ model ProductUrl {
   url       String
   productId String
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
   @@id([url, productId])
   @@index([productId])
 }
@@ -56,11 +57,11 @@ model Order {
 }
 
 model OrderItem {
-  id        String   @id @default(uuid())
-  quantity  Int
-  total     String
-  productId String
-  title       String       
+  id          String   @id @default(uuid())
+  quantity    Int
+  total       String
+  productId   String
+  title       String
   desc        String
   price       String
   discount    String
@@ -69,10 +70,10 @@ model OrderItem {
   color       String
   stock       String
   images      String
-  orderId   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  order     Order    @relation(fields: [orderId], references: [id])
+  orderId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  order       Order    @relation(fields: [orderId], references: [id])
 }
 
 model Address {

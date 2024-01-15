@@ -3,10 +3,63 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 
 const ProductOperation = () => {
-
+  const colors= [
+    "Red",
+    "Royal Blue",
+    "Green",
+    "Yellow",
+    "Pink",
+    "Purple",
+    "Turquoise",
+    "Orange",
+    "Maroon",
+    "Teal",
+    "Peach",
+    "Gold",
+    "Silver",
+    "Cream",
+    "Navy Blue",
+    "Lavender",
+    "Wine",
+    "Beige",
+    "Mustard",
+    "Aqua Blue",
+    "Emerald Green",
+    "Magenta",
+    "Rust",
+    "Sky Blue",
+    "Coral",
+    "Indigo",
+    "Lilac",
+    "Rose Pink",
+    "Mint Green",
+    "Charcoal Gray",
+    "Tangerine",
+    "Olive Green",
+    "Mauve",
+    "Coffee Brown",
+    "Orchid",
+    "Slate Gray",
+    "Ivory",
+    "Turmeric Yellow",
+    "Blush Pink",
+    "Cobalt Blue",
+    "Sea Green",
+    "Burgundy",
+    "Peacock Blue",
+    "Chocolate Brown",
+    "Salmon Pink",
+    "Copper",
+    "Brick Red",
+    "Pearl White",
+    "Electric Blue",
+    "Dusty Rose"
+  ];
     const [searchT,setSearchT]=useState(false);
     const [filterT,setFilterT]=useState(false);
 
+    const [selectedColor,setSelectedColor]=useState()
+  
 
   return (
     <div className="flex-w flex-sb-m p-b-52">
@@ -143,78 +196,17 @@ const ProductOperation = () => {
             </div>
             <div className="filter-col3 p-r-15 p-b-27">
               <div className="mtext-102 cl2 p-b-15">Color</div>
-              <ul>
-                <li className="p-b-6">
-                  <span className="fs-15 lh-12 m-r-6" style={{ color: "#222" }}>
-                    <i className="zmdi zmdi-circle" />
-                  </span>
-                  <Link
-                  href="product?color=Black" className="filter-link stext-106 trans-04">
-                    Black
-                  </Link>
-                </li>
-                <li className="p-b-6">
-                  <span
-                    className="fs-15 lh-12 m-r-6"
-                    style={{ color: "#4272d7" }}
-                  >
-                    <i className="zmdi zmdi-circle" />
-                  </span>
-                  <Link
-                  href="product?color=Blue"
-                    className="filter-link stext-106 trans-04 "
-                  >
-                    Blue
-                  </Link>
-                </li>
-                <li className="p-b-6">
-                  <span
-                    className="fs-15 lh-12 m-r-6"
-                    style={{ color: "pink" }}
-                  >
-                    <i className="zmdi zmdi-circle" />
-                  </span>
-                  <Link
-                  href="product?color=Pink" className="filter-link stext-106 trans-04">
-                    Pink
-                  </Link>
-                </li>
-                <li className="p-b-6">
-                  <span
-                    className="fs-15 lh-12 m-r-6"
-                    style={{ color: "#00ad5f" }}
-                  >
-                    <i className="zmdi zmdi-circle" />
-                  </span>
-                  <Link
-                  href="product?color=Green"
-                   className="filter-link stext-106 trans-04">
-                    Green
-                  </Link>
-                </li>
-                <li className="p-b-6">
-                  <span
-                    className="fs-15 lh-12 m-r-6"
-                    style={{ color: "#fa4251" }}
-                  >
-                    <i className="zmdi zmdi-circle" />
-                  </span>
-                  <Link
-                  href="product?color=Red"
-                  className="filter-link stext-106 trans-04">
-                    Red
-                  </Link>
-                </li>
-                <li className="p-b-6">
-                  <span className="fs-15 lh-12 m-r-6" style={{ color: "#aaa" }}>
-                    <i className="zmdi zmdi-circle-o" />
-                  </span>
-                  <Link
-                  href="product?color=uncategorized" className="filter-link stext-106 trans-04">
-                  uncategorized
-                  </Link>
-                </li>
-              </ul>
+              <select onChange={(e) => location.href=`/product?color=${e.target.value}`}
+              className="stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"
+             >
+               <option disabled selected >Select Color</option>
+               <option>Uncategorized</option>
+              {colors.map((clr)=>{
+               return(
+                 <option>{clr}</option>
+               )
+              })}
+             </select>
             </div>
             <div className="filter-col4 p-b-27">
               <div className="mtext-102 cl2 p-b-15">Tags</div>
