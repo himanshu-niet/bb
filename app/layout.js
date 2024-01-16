@@ -3,19 +3,20 @@ import './globals.css'
 import {Providers} from "./providers";
 
 
-export const metadata = {
-  title: 'Bunkar Banaras - Elegance Woven in Every Thread',
-  description: 'Bunkar Banaras - Elegance Woven in Every Thread',
-}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
     <head>
-  
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <meta name="title" content='Bunkar Banaras - Elegance Woven in Every Thread'/>
+    <meta name="description" content="Bunkar Banaras - Elegance Woven in Every Thread. Explore our collection of Georgette, Katan Silk, Tussar Silk, Kora Silk, Organza, Chiffon, Dupion Silk, and Tissue Sarees."/>
+    <meta name="keywords" content="Banarasi sarees, Handcrafted sarees, Georgette sarees, Katan Silk sarees, Tussar Silk sarees, Kora Silk sarees, Organza sarees, Chiffon sarees, Dupion Silk sarees, Tissue sarees, Tradition, Elegance, Craftsmanship"/>
+
     {/*===============================================================================================*/}
     <link rel="icon" type="image/png" href="logo1.png" />
+    
     {/*===============================================================================================*/}
     <link
       rel="stylesheet"

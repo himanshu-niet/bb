@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure, RadioGroup, Radio } from "@nextui-org/react";
 import Link from "next/link";
+import { indianRs } from "@/utils/fetuers";
 
 export default function ShowProducts({product}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -62,9 +63,9 @@ export default function ShowProducts({product}) {
                    
                     </th>
 
-                    <td className="px-6 py-4">{item.price}</td>
+                    <td className="px-6 py-4">{indianRs(item.price)}</td>
                     <td className="px-6 py-4">{item.quantity}</td>
-                    <td className="px-6 py-4">{item.total}</td>
+                    <td className="px-6 py-4">{indianRs(item.total)}</td>
                   </tr>
   )
 })}

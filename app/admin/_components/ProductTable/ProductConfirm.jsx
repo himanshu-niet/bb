@@ -1,3 +1,4 @@
+
 "use client"
 import React, { useEffect, useState } from "react";
 import {
@@ -18,49 +19,67 @@ import {
   Pagination,
 } from "@nextui-org/react";
 
-import {VerticalDotsIcon} from "../common/VerticalDotsIcon";
 import {SearchIcon} from "../common/SearchIcon";
 import {ChevronDownIcon} from "../common/ChevronDownIcon";
-import {columns} from "./data";
 import {capitalize} from "../common/utils";
-import AddProduct from "./AddProduct";
-import Link from "next/link";
+
+import ShowAddress from "./ShowAddress";
+import ShowProducts from "./ShowProducts";
 import axios from "axios";
+import ShowUser from "./ShowUser";
 import { indianRs } from "@/utils/fetuers";
 
 
+const columns = [
+  {name: "ID", uid: "id", sortable: true},
+  {name: "DATE", uid: "createdAt", sortable: true},
+  {name: "TOTAL", uid: "total"},
+  {name: "STATUS", uid: "shippingStatus"},
+  {name: "ADDRESS", uid: "address"},
+  {name: "USER", uid: "userId"},
+  {name: "PRODUCTS", uid: "orderItem"},
+  {name: "PROCEED", uid: "proceed"},
+];
 
-const INITIAL_VISIBLE_COLUMNS = ["title", "price","discount","color", "stock", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [ "id","createdAt", "total", "address","userId","orderItem","proceed","shippingStatus"];
 
-export default function ProductTable() {
+export default function ProductConfirm() {
+
 
   useEffect(()=>{
     getApi()
       },[])
+    
       const [users,setData]=useState([]);
     
       const getApi=async ()=>{
-        axios.get("/api/admin/product").then((res)=>{
+        axios.get("/api/admin/product/confirm").then((res)=>{
           setData(res.data.data)
         })
       }
-  const deleteProduct=(id)=>{
-    axios.delete(`/api/admin/product?id=${id}`).then((res)=>{
-      console.log(res)
-      alert("Product Deleted...")
-      location.href="/admin/products"
+
+  const haddleClick=(id)=>{
+    axios.put(`/api/admin/product/update?id=${id}`, {
+      "shippingStatus":"SHIPPED"
     })
+        .then(function (response) {
+         console.log(response)
+          alert("Order Update Succesfully")
+           location.href = "/admin/ongoingOrder";
+        })
+        .catch(function (error) {
+          console.log(error)
+          alert("Order Not Updated")
+          console.log(error)
+        });
   }
-
-  
-
 
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState(new Set(INITIAL_VISIBLE_COLUMNS));
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState({
-    column: "stock",
+    column: "createdAt",
     direction: "descending",
   });
   const [page, setPage] = React.useState(1);
@@ -78,7 +97,7 @@ export default function ProductTable() {
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
-        user.title.toLowerCase().includes(filterValue.toLowerCase()),
+        user.createdAt.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
    
@@ -111,30 +130,35 @@ export default function ProductTable() {
 
     switch (columnKey) {
      
-      case "price":
+      case "address":
         return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{ indianRs(cellValue)}</p>
-          </div>
+          <ShowAddress address={user.address}/>
         );
-      case "stock":
+      case "userId":
         return (
-          <Chip size="sm" variant="flat">
-            {cellValue}
-          </Chip>
+          <ShowUser userId={user.userId}/>
         );
-      case "actions":
-        return (
-          <div className="relative flex justify-end items-center gap-2">
-          <Link className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" href={"/productdetail/"+user.id}>View</Link>
-          <Link className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" href={"/admin/update/"+user.id}>Edit</Link>
-          <button className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" onClick={()=>deleteProduct(user.id)}>Delete</button>
 
-           
-          </div>
+        case "orderItem":
+          return (
+          <ShowProducts product={user.orderItem}/>
+          );
+      case "proceed":
+        return (
+          <Button onClick={()=>haddleClick(user.id)} color="primary" endContent={<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+        </svg>
+        }>
+        Proceed
+      </Button>
         );
-        
-      default:
+        case "total":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">{ indianRs(cellValue)}</p>
+            </div>
+          );
+     default:
         return cellValue;
     }
   }, []);
@@ -177,7 +201,7 @@ export default function ProductTable() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by Title..."
+            placeholder="Search by Date"
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
@@ -206,12 +230,12 @@ export default function ProductTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <AddProduct/>
+          
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total {users.length} Products</span>
-          <span className="text-default-800 text-large">Product List</span>
+          <span className="text-default-400 text-small">Total {users.length} Confirm Order</span>
+          <span className="text-default-800 text-large">Confirm Order List</span>
          
           <label className="flex items-center text-default-400 text-small">
             Rows per page:
@@ -241,7 +265,11 @@ export default function ProductTable() {
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
-       
+        <span className="w-[30%] text-small text-default-400">
+          {selectedKeys === "all"
+            ? "All items selected"
+            : `${selectedKeys.size} of ${filteredItems.length} selected`}
+        </span>
         <Pagination
           isCompact
           showControls
@@ -272,6 +300,8 @@ export default function ProductTable() {
       classNames={{
         wrapper: "max-h-[382px]",
       }}
+      selectedKeys={selectedKeys}
+      selectionMode="multiple"
       sortDescriptor={sortDescriptor}
       topContent={topContent}
       topContentPlacement="outside"

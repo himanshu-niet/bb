@@ -1,4 +1,4 @@
-import { getOfferPrice } from '@/utils/fetuers'
+import { getOfferPrice, indianRs } from '@/utils/fetuers'
 import Link from 'next/link'
 import React from 'react'
 
@@ -24,8 +24,8 @@ const Product = ({item}) => {
           >
             {item.title}
           </span>
-          {item.discount > 0 ? <span className="stext-105 cl2"><del className='mr-2 text-gray-500'>Rs.{item.price}</del>Rs.{getOfferPrice(item.price, item.discount)}</span>
-                    : <span className="stext-105 cl2">Rs.{getOfferPrice(item.price, item.discount)}</span>}
+          {item.discount > 0 ? <span className="stext-105 cl2"><del className='mr-2 text-gray-500'>Rs.{indianRs(item.price)}</del>Rs.{indianRs(getOfferPrice(item.price, item.discount))}</span>
+                    : <span className="stext-105 cl2">Rs.{indianRs(getOfferPrice(item.price, item.discount))}</span>}
         </div>
        
       </div>

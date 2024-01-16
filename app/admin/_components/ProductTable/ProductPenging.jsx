@@ -28,6 +28,7 @@ import ShowAddress from "./ShowAddress";
 import ShowProducts from "./ShowProducts";
 import axios from "axios";
 import ShowUser from "./ShowUser";
+import { indianRs } from "@/utils/fetuers";
 
 
 
@@ -59,12 +60,12 @@ export default function ProductTable() {
 
   const haddleClick=(id)=>{
     axios.put(`/api/admin/product/update?id=${id}`, {
-      "shippingStatus":"SHIPPED"
+      "shippingStatus":"CONFIRM"
     })
         .then(function (response) {
          console.log(response)
           alert("Order Update Succesfully")
-         location.href = "/admin/ongoingOrder";
+         location.href = "/admin/confirm";
         })
         .catch(function (error) {
           console.log(error)
@@ -151,6 +152,12 @@ export default function ProductTable() {
         Proceed
       </Button>
         );
+        case "total":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">{ indianRs(cellValue)}</p>
+            </div>
+          );
      default:
         return cellValue;
     }

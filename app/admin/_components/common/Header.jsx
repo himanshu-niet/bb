@@ -10,9 +10,10 @@ import Link from 'next/link'
 
 const navigation = [
   { name: 'Order Pending', href: '/admin', current: false },
+  { name: 'Order Confirm', href: '/admin/comfirm', current: false },
   { name: 'Order Ongoing', href: '/admin/ongoingOrder', current: false },
   { name: 'Order History', href: '/admin/orderHistory', current: false },
-  { name: 'All Order', href: '/admin/orders', current: false },
+  { name: 'All Order',     href: '/admin/orders', current: false },
   { name: 'Products List', href: '/admin/products', current: false },
 
 ]

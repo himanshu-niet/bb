@@ -1,4 +1,5 @@
 "use client"
+import { indianRs } from '@/utils/fetuers';
 import useCartStore from '@/utils/store/cart';
 import React from 'react'
 
@@ -13,7 +14,7 @@ const Tr = ({item}) => {
       </div>
     </td>
     <td className="column-2">{item.title}</td>
-    <td className="column-3">₹{(item.discountPrice).toFixed()}</td>
+    <td className="column-3">₹{indianRs(item.discountPrice.toFixed())}</td>
     <td className="column-4">
       <div className="wrap-num-product flex-w m-l-auto m-r-0">
         <div onClick={()=>decreaseQuantity(item.id)} className="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -31,7 +32,7 @@ const Tr = ({item}) => {
         </div>
       </div>
     </td>
-    <td className="column-5">₹ {(item.discountPrice*item.quantity).toFixed(2)}</td>
+    <td className="column-5">₹ {indianRs((item.discountPrice*item.quantity).toFixed(2))}</td>
   </tr>
   )
 }

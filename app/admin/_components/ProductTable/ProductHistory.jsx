@@ -27,6 +27,7 @@ import ShowAddress from "./ShowAddress";
 import ShowProducts from "./ShowProducts";
 import ShowUser from "./ShowUser";
 import axios from "axios";
+import { indianRs } from "@/utils/fetuers";
 
 
 
@@ -123,6 +124,13 @@ export default function ProductHistory() {
           return (
           <ShowProducts product={user.orderItem}/>
           );
+          
+          case "total":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{ indianRs(cellValue)}</p>
+          </div>
+        );
     
      default:
         return cellValue;

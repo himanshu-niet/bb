@@ -1,10 +1,11 @@
 'use client'
 
-import { getOfferPrice } from '@/utils/fetuers'
+import { getOfferPrice, indianRs } from '@/utils/fetuers'
 import useCartStore from '@/utils/store/cart'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ProductImage from './ProductImage'
+import Parser from 'html-react-parser';
 
 
 const ProductDetail = ({ id }) => {
@@ -89,8 +90,8 @@ const ProductDetail = ({ id }) => {
                 </h5>
 
                 <div className='my-3'>
-                  {data.discount > 0 ? <span className="mtext-106 cl2 "><del className='mr-2 text-gray-500'>Rs.{data.price}</del>Rs.{getOfferPrice(data.price, data.discount)}</span>
-                    : <span className="mtext-106 cl2 ">Rs.{getOfferPrice(data.price, data.discount)}</span>}
+                  {data.discount > 0 ? <span className="mtext-106 cl2 "><del className='mr-2 text-gray-500'>Rs.{indianRs(data.price)}</del>Rs.{indianRs(getOfferPrice(data.price, data.discount))}</span>
+                    : <span className="mtext-106 cl2 ">Rs.{indianRs(getOfferPrice(data.price, data.discount))}</span>}
 
                 </div>
                 <div>
@@ -271,7 +272,7 @@ const ProductDetail = ({ id }) => {
                   </div>
                   <hr/>
                   <p className='stext-102 my-2'>
-                  {data.desc}
+                  {Parser(data.desc)}
                   </p>
                   <hr/>
                   <details className='my-2'>

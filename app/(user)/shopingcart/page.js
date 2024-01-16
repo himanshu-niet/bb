@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import React, { useEffect, useState } from 'react'
 import Tr from '../_components/Tr';
-import { calculateTotalCost } from '@/utils/fetuers';
+import { calculateTotalCost, indianRs } from '@/utils/fetuers';
 import Link from 'next/link';
 import { getCookie } from '@/utils/cookie';
 const page = () => {
@@ -152,7 +152,7 @@ setUserId(JSON.parse(getCookie("user")));
                 <span className="mtext-101 cl2">Total:</span>
               </div>
               <div className="size-209 p-t-1">
-                <span className="mtext-110 cl2">₹{calculateTotalCost(cartItems).toFixed(2)}</span>
+                <span className="mtext-110 cl2">₹{indianRs(calculateTotalCost(cartItems).toFixed(2))}</span>
               </div>
             </div>
               

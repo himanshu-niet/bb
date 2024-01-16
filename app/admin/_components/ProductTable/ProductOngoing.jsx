@@ -27,6 +27,7 @@ import ShowAddress from "./ShowAddress";
 import ShowProducts from "./ShowProducts";
 import axios from "axios";
 import ShowUser from "./ShowUser";
+import { indianRs } from "@/utils/fetuers";
 
 
 const columns = [
@@ -151,6 +152,12 @@ export default function ProductOngoing() {
         Proceed
       </Button>
         );
+        case "total":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">{ indianRs(cellValue)}</p>
+            </div>
+          );
      default:
         return cellValue;
     }

@@ -29,6 +29,7 @@ import ShowUser from "@/app/admin/_components/ProductTable/ShowUser";
 import axios from "axios";
 import { PlusIcon } from "@/app/admin/_components/common/PlusIcon";
 import { deleteCookie } from "@/utils/cookie";
+import { indianRs } from "@/utils/fetuers";
 
 
 const columns = [
@@ -117,6 +118,10 @@ export default function OrderDetail({users}) {
         case "orderItem":
           return (
           <ShowProducts product={user.orderItem}/>
+          );
+          case "total":
+          return (
+          indianRs(user.total)
           );
           
       

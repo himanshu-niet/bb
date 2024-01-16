@@ -14,6 +14,7 @@ const page = () => {
 
 const [email,setEmail]=useState("");
 const [password,setPass]=useState("");
+const [showPassword, setShowPassword] = useState(false);
 
 
 const handdleSubmit=()=>{
@@ -68,7 +69,9 @@ const handdleSubmit=()=>{
               Password
             </label>
             <input
-              type="password"
+            type={
+              showPassword ? "text" : "password"
+          }
               name="password"
               id="password"
               value={password}
@@ -76,7 +79,20 @@ const handdleSubmit=()=>{
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required=""
             />
+            
           </div>
+          <div className='flex items-center'>
+          <input
+                    id="check"
+                    type="checkbox"
+                    value={showPassword}
+                    onChange={() =>
+                        setShowPassword((prev) => !prev)
+                    }
+                />
+                    
+                    <label className='mt-2 mx-2' htmlFor="check" >Show Password</label>
+                </div>
          
           <button
             onClick={handdleSubmit}
@@ -84,9 +100,6 @@ const handdleSubmit=()=>{
           >
             Sign in
           </button>
-
-        
-
 
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
             Don’t have an account yet?{" "}

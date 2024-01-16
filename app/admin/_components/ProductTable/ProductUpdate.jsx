@@ -1,11 +1,21 @@
 "use client"
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
+import 'react-quill/dist/quill.snow.css';
+import dynamic from "next/dynamic";
 
 
 export default function ProductUpdate({data}) {
  
+  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), { ssr: false }),[]);
+
+
+  const [value, setValue] = useState(data.desc);
+
+
+
+
   const colors= [
     "Red",
     "Royal Blue",
@@ -109,6 +119,7 @@ export default function ProductUpdate({data}) {
       values['subCategory']=selectedSubcategory;
       values['color']=selectedColor;
       values['images']=images;
+      values['desc']=value;
 
       const formData = new FormData();
 
@@ -358,15 +369,8 @@ console.log(response)
               </div>
               {/* End Col */}
               <div className="sm:col-span-9">
-                <textarea
-                  id="af-account-bio"
-                  className="py-2 px-3 block w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-                  rows={6}
-                  required
-                  name="desc"
-                  onChange={formik.handleChange}
-                  value={formik.values.desc}
-                />
+              <ReactQuill theme="snow" value={value} onChange={setValue}  className="w-full border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"/>
+
               </div>
               {/* End Col */}
             </div>

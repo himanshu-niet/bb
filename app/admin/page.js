@@ -1,4 +1,4 @@
-
+"use client"
 import ProductPenging from "./_components/ProductTable/ProductPenging";
 export default function page() {
 
