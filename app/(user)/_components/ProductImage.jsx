@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -13,10 +13,13 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 export default function ProductImage({images}) {
+
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
     <>
+  
       <Swiper
         style={{
           '--swiper-navigation-color': '#fff',

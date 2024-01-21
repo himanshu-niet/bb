@@ -17,7 +17,7 @@ CREATE TABLE `User` (
 CREATE TABLE `Product` (
     `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
-    `desc` VARCHAR(191) NOT NULL,
+    `desc` LONGTEXT NOT NULL,
     `price` VARCHAR(191) NOT NULL,
     `discount` VARCHAR(191) NOT NULL,
     `category` VARCHAR(191) NOT NULL,
@@ -51,6 +51,8 @@ CREATE TABLE `Order` (
     `addressId` VARCHAR(191) NULL,
     `returnInfoId` VARCHAR(191) NULL,
 
+    INDEX `Order_addressId_fkey`(`addressId`),
+    INDEX `Order_returnInfoId_fkey`(`returnInfoId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -73,6 +75,7 @@ CREATE TABLE `OrderItem` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    INDEX `OrderItem_orderId_fkey`(`orderId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

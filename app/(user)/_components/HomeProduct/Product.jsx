@@ -8,7 +8,7 @@ const Product = ({item}) => {
     {/* Block2 */}
     <div className="block2">
       <div className="block2-pic hov-img0">
-        <img src={item.images[0]?.url} alt="IMG-PRODUCT" />
+        <img src={item.mainImage} alt="IMG-PRODUCT" />
         <Link
         href={`productdetail/${item.id}`}
           className="block2-btn flex-c-m stext-103  size-102 btn-m-lm p-lr-15 trans-04 js-show-modal1"

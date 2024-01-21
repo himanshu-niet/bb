@@ -78,7 +78,7 @@ const ProductDetail = ({ id }) => {
         <div className="container">
           <div className="row">
             <div className="col-md-6  p-b-30 product">
-              <ProductImage images={data?.images}/>
+              <ProductImage images={[{url:data.mainImage},...data?.images]}/>
             </div>
             <div className="col-md-6  p-b-30 px-5 md:px-0 ">
               <div className=" p-t-5 p-lr-0-lg">

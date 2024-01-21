@@ -20,7 +20,8 @@ try {
         subCategory,
         color,
         stock,
-        images
+        images,
+        main
     }=await request.json();
 
     if (!title,
@@ -31,7 +32,8 @@ try {
         !subCategory,
         !color,
         !stock,
-        !images) {
+        !images,
+        !main) {
         return NextResponse.json({
             success: false,
             error:"Bad Request"
@@ -40,6 +42,14 @@ try {
         });
     }
 
+   
+    let imagesLinksM;
+    if (main != undefined ) {
+        const result = await cloudinary.v2.uploader.upload(main, {
+            folder: "products-test",
+          });
+          imagesLinksM=result.secure_url;
+      }
 
 
     let imagesArr = [];
@@ -70,6 +80,7 @@ try {
             subCategory,
             color,
             stock:String(stock),
+            mainImage:imagesLinksM,
             images: {
                 create: imagesLinks.map((url) => ({ url })),
               },
@@ -169,7 +180,8 @@ export async function PUT(request){
             subCategory,
             color,
             stock,
-            images
+            images,
+            main
         }=await request.json();
 
         const url = new URL(request.nextUrl.href);
@@ -193,6 +205,14 @@ export async function PUT(request){
             });
         }
     
+        let imagesLinksM;
+         if (main != undefined) {
+             const result = await cloudinary.v2.uploader.upload(main, {
+                 folder: "products-test",
+               });
+               imagesLinksM=result.secure_url;
+           }
+           
     
         let imagesArr = [];
         let imagesLinks=[];
@@ -209,6 +229,8 @@ export async function PUT(request){
               imagesLinks.push(result.secure_url);
             }
           }
+
+
           
           const updateProduct = await prisma.product.update({
             where: {
@@ -223,6 +245,9 @@ export async function PUT(request){
                 subCategory,
                 color,
                 stock:String(stock),
+                ...(imagesLinksM? { mainImage:imagesLinksM}: {}),
+
+
                 ...(imagesLinks.length>0? { images: {
                     deleteMany: {},
                     create: imagesLinks.map((url) => ({ url })),

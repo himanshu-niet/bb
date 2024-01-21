@@ -49,7 +49,8 @@ setUserId(JSON.parse(getCookie("user")));
         subCategory:cartItem.subCategory,
         color:cartItem.color,
         stock:cartItem.stock,
-        images:cartItem.images[0].url 
+        images:cartItem.mainImage,
+        
       }))
      
       let total = products.reduce((acc, product) => {

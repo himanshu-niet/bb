@@ -10,7 +10,7 @@ const Tr = ({item}) => {
     <tr className="table_row">
     <td className="column-1">
       <div onClick={()=>removeItemFromCart(item.id)} className="how-itemcart1">
-        <img src={item?.images[0].url} alt="IMG" />
+        <img src={item.mainImage} alt="IMG" />
       </div>
     </td>
     <td className="column-2">{item.title}</td>

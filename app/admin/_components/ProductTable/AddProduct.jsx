@@ -82,6 +82,8 @@ export default function App() {
   const [selectedColor,setSelectedColor]=useState("Uncategorized")
   
   const [images, setImages] = useState([]);
+  const [mainImages, setMainImages] = useState();
+
 
 
   const registerDataChange = (e) => {
@@ -95,6 +97,19 @@ export default function App() {
         }};
       reader.readAsDataURL(file);
     });
+  };
+
+
+  const registerDataChangeMain = (e) => {
+    
+    setMainImages("");
+    
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setMainImages(reader.result);
+      }};
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   const formik = useFormik({
@@ -116,12 +131,18 @@ export default function App() {
       values['color']=selectedColor;
       values['images']=images;
       values['desc']=value;
+      values['main']=mainImages
 
       const formData = new FormData();
+
+
+      formData.append("main", mainImages);
 
       images.forEach((image) => {
         formData.append("images", image);
       });
+
+
 
       // const token = getCookie("token");
 
@@ -130,7 +151,6 @@ export default function App() {
 console.log(response)
           alert("Product Added Succesfully")
            location.href = "/admin/products";
-
 
         })
         .catch(function (error) {
@@ -167,6 +187,32 @@ console.log(response)
                 <form onSubmit={formik.handleSubmit} encType="multipart/form-data" method="POST">
                   {/* Grid */}
                   <div className="grid sm:grid-cols-12 gap-2 sm:gap-6">
+                    <div className="sm:col-span-3">
+                      <label className="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+                        Main Photo
+                      </label>
+                    </div>
+                    {/* End Col */}
+                    <div className="sm:col-span-9">
+                      <div className="flex">
+
+                        <div className="flex gap-x-2">
+                          <div>
+
+                            <input className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border border-gray-300 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                              accept='image/*'
+                              name="main"
+                              onChange={registerDataChangeMain}
+                              type="file" 
+                              multiple="false"
+                              required
+                              />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                     <div className="sm:col-span-3">
                       <label className="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
                         Product photo
