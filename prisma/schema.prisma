@@ -3,12 +3,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String   @id @default(uuid()) @map("_id")
   email     String   @unique
   name      String
   phone     String
@@ -19,9 +19,9 @@ model User {
 }
 
 model Product {
-  id          String       @id @default(uuid())
+  id          String       @id @default(uuid()) @map("_id")
   title       String       @unique
-  desc        String       @db.LongText
+  desc        String       
   price       String
   discount    String
   category    String
@@ -35,15 +35,15 @@ model Product {
 }
 
 model ProductUrl {
+  id        String   @id @default(uuid()) @map("_id")
   url       String
   productId String
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  @@id([url, productId])
   @@index([productId])
 }
 
 model Order {
-  id             String      @id @default(uuid())
+  id             String      @id @default(uuid()) @map("_id")
   userId         String
   total          String
   shippingStatus String
@@ -60,7 +60,7 @@ model Order {
 }
 
 model OrderItem {
-  id          String   @id @default(uuid())
+  id          String   @id @default(uuid()) @map("_id")
   quantity    Int
   total       String
   productId   String
@@ -82,7 +82,7 @@ model OrderItem {
 }
 
 model Address {
-  id         String  @id @default(uuid())
+  id         String  @id @default(uuid()) @map("_id")
   street     String
   city       String
   state      String
@@ -92,7 +92,7 @@ model Address {
 }
 
 model ReturnInfo {
-  id                String    @id @default(uuid())
+  id                String    @id @default(uuid()) @map("_id")
   reason            String
   returnRequested   Boolean
   returnApproved    Boolean?
