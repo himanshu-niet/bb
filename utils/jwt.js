@@ -1,6 +1,7 @@
+const { ACCESS_TOKEN_SECRET } = require('@/env')
 const jwt = require('jsonwebtoken')
-const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET
-const resetTokenSecret = process.env.ACCESS_TOKEN_SECRET
+const accessTokenSecret = ACCESS_TOKEN_SECRET
+const resetTokenSecret = ACCESS_TOKEN_SECRET
 
 module.exports = {
     signAccessToken(payload){

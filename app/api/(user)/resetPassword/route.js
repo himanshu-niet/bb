@@ -1,3 +1,4 @@
+import { URL } from "@/env";
 import prisma from "@/lib/prisma";
 import { resetLinkToken } from "@/utils/jwt";
 import transporter from "@/utils/sendMail";
@@ -19,7 +20,7 @@ export async function GET(request) {
 
           const token=await resetLinkToken(user)
 
-          let resetLink=`${process.env.URL}/changePassword?token=${token}`;
+          let resetLink=`${URL}/changePassword?token=${token}`;
 
 
           let htmlcontent=`<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3Please reset your password

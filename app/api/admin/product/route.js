@@ -1,12 +1,13 @@
+import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_NAME } from "@/env";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 const cloudinary = require("cloudinary");
 export const dynamic='force-dynamic'
 
 cloudinary.config({ 
-    cloud_name: process.env.CLOUDINARY_NAME, 
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+    cloud_name: CLOUDINARY_NAME, 
+    api_key: CLOUDINARY_API_KEY,
+    api_secret: CLOUDINARY_API_SECRET
 });
 
 export async function POST(request){
